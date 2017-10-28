@@ -1,0 +1,21 @@
+{
+  "scripts": {
+    "start": "live-server"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "expect": "^21.2.1"
+  },
+  "name": "Dan",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Soomin Kimu <soominkimu@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "redux": "^3.7.2"
+  }
+}
