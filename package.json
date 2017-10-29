@@ -7,6 +7,7 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-0": "^6.24.1",
+    "deep-freeze": "^0.0.1",
     "expect": "^21.2.1"
   },
   "name": "Dan",
@@ -16,6 +17,8 @@
   "license": "MIT",
   "dependencies": {
     "babel-cli": "^6.26.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "redux": "^3.7.2"
   }
 }
