@@ -1,9 +1,12 @@
 ReactDOM.render(
-	<h3>11. Redux: Writing a Todo List Reducer (Adding a Todo)</h3>,
+	<div>
+		<h3>11. Redux: Writing a Todo List Reducer (Adding a Todo)</h3>
+		<h3>12. Redux: Writing a Todo List Reducer (Toggling a Todo)</h3>
+	</div>,
 	document.getElementById('title')
 );
 
-const todos = (state = [], action) => {
+const todos = (state = [], action) => {		// reducer
 	switch (action.type) {
 		case 'ADD_TODO':
 			return [
@@ -14,6 +17,17 @@ const todos = (state = [], action) => {
 					completed: false
 				}
 			];
+		case 'TOGGLE_TODO':
+			return state.map(todo => {		// map function
+				if (todo.id !== action.id) {
+					return todo;
+				}
+
+				return {
+					...todo,
+					completed: !todo.completed
+				};
+			});
 		default:
 			return state;
 	}
@@ -36,9 +50,44 @@ const testAddTodo = () => {
 
 	deepFreeze(stateBefore);
 	deepFreeze(action);
-
 	expect( todos(stateBefore, action) ).toEqual(stateAfter);
 };
 
+const testToggleTodo = () => {
+	const stateBefore = [
+		{
+			id: 0,
+			text: 'Learn Redux',
+			completed: false
+		},
+		{
+			id: 1,
+			text: 'Go shopping',
+			completed: false
+		}
+	];
+	const action = {
+		type: 'TOGGLE_TODO',
+		id: 1
+	};
+	const stateAfter = [
+		{
+			id: 0,
+			text: 'Learn Redux',
+			completed: false
+		},
+		{
+			id: 1,
+			text: 'Go shopping',
+			completed: true
+		}
+	];
+
+	deepFreeze(stateBefore);
+	deepFreeze(action);
+	expect( todos(stateBefore, action) ).toEqual(stateAfter);
+}
+
 testAddTodo();
+testToggleTodo();
 console.log('All tests passed.');
