@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "live-server"
+    "start": "static"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -8,7 +8,8 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-0": "^6.24.1",
     "deep-freeze": "^0.0.1",
-    "expect": "^21.2.1"
+    "expect": "^21.2.1",
+    "node-static": "^0.7.10"
   },
   "name": "Dan",
   "version": "1.0.0",
