@@ -1,8 +1,8 @@
 ReactDOM.render(
 	<div>
-		<h3>05. Redux: Writing a Counter Reducer with Tests</h3>
-		<h3>06. Redux: Store Methods: getState(), dispatch(), and subscribe()</h3>
-		<h3>07. Redux: Implementing Store from Scratch</h3>
+		<h3>05. Writing a Counter Reducer with Tests</h3>
+		<h3>06. Store Methods: getState(), dispatch(), and subscribe()</h3>
+		<h3>07. Implementing Store from Scratch</h3>
 		<br/>
 	</div>,
 	document.getElementById('title')

@@ -1,7 +1,7 @@
 ReactDOM.render(
 	<div>
-		<h3>17-18. Redux: React Todo List Example (Adding & Toggling a Todo)</h3>
-		<h3>19. Redux: React Todo List Example (Filtering a Todos)</h3>
+		<h3>17-18. React Todo List Example (Adding & Toggling a Todo)</h3>
+		<h3>19. React Todo List Example (Filtering a Todos)</h3>
 	</div>,
 	document.getElementById('title')
 );
@@ -101,10 +101,8 @@ class TodoApp extends Component {
 			todos,
 			visibilityFilter
 		} = this.props;
-		const visibleTodos = getVisibleTodos(
-			todos,
-			visibilityFilter
-		);
+		console.log(this.props);
+		const vTodos = getVisibleTodos(todos, visibilityFilter);
 		return (
 			<div>
 				<input ref={node => {
@@ -120,7 +118,7 @@ class TodoApp extends Component {
 					this.input.value = '';
 				}}>Add Todo</button>
 				<ul>
-					{visibleTodos.map(todo =>
+					{vTodos.map(todo =>
 						<li key={todo.id}
 							onClick={() => {
 								store.dispatch({

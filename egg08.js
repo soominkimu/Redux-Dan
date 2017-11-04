@@ -1,5 +1,5 @@
 ReactDOM.render(
-	<h3>08. Redux: React Counter Example</h3>,
+	<h3>08. React Counter Example</h3>,
 	document.getElementById('title')
 );
 //console.log(process.env.NODE_ENV);	// error when using React 16

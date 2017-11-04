@@ -38,6 +38,19 @@ const createStore = (reducer) => {
 #### 11.12. Writing a Todo List Reducer (Adding & Toggling a Todo)
 #### 13.14.15. Reducer Composition with Arrays, Objects, and combineReducers()
 #### 16. Implementing combineReducers() from Scratch
+```javascript
+const combineReducers = (reducers) => {
+	return (state = {}, action) => {
+		return Object.keys(reducers).reduce(
+			(nextState, key) => {
+				nextState[key] = reducers[key](state[key], action);
+			return nextState;
+			},
+			{}
+		);
+	};
+};
+```
 #### 17.18.19. React Todo List Example (Adding, Toggling, and Filtering Todos)
 #### 20.21. Extracting Presentational Components (Todo, TodoList / AddTodo, Footer, FilterLink)
 #### 22.23. Extracting Container Components (FilterLink / VisibleTodoList, AddTodo)

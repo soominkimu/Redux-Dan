@@ -1,8 +1,8 @@
 ReactDOM.render(
 	<div>
-		<h3>11-12. Redux: Writing a Todo List Reducer (Adding & Toggling a Todo)</h3>
-		<h3>13-15. Redux: Reducer Composition with Arrays, Objects, and combineReducers()</h3>
-		<h3>16. Redux: Implementing combineReducers() from Scratch</h3>
+		<h3>11-12. Writing a Todo List Reducer (Adding & Toggling a Todo)</h3>
+		<h3>13-15. Reducer Composition with Arrays, Objects, and combineReducers()</h3>
+		<h3>16. Implementing combineReducers() from Scratch</h3>
 	</div>,
 	document.getElementById('title')
 );
