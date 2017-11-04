@@ -1,5 +1,8 @@
 ReactDOM.render(
-	<h3>09. Redux: Avoiding Array Mutations with concat(), slice(), and ...spread</h3>,
+	<div>
+		<h3>09. Redux: Avoiding Array Mutations with concat(), slice(), and ...spread</h3>
+		<h3>10. Redux: Avoiding Object Mutations with Object.assign() and ...spread</h3>
+	</div>,
 	document.getElementById('title')
 );
 
@@ -42,6 +45,26 @@ const incrementCounter = (list, index) => {
 	];
 };	
 
+const toggleTodo = (todo) => {
+	//	todo.completed = !todo.completed;
+	// 	return todo;
+
+	//	return {
+	//		id: todo.id,
+	//		text: todo.text,
+	//		completed: !todo.completed
+	//	};
+
+	//	return Object.assign({}, todo, {
+	//		completed: !todo.completed
+	//	});
+
+	return {
+		...todo,
+		completed: !todo.completed
+	};
+};
+
 const testAddCounter = () => {
 	const listBefore = [];
 	const listAfter = [0];
@@ -66,7 +89,24 @@ const testIncrementCounter = () => {
 	expect( incrementCounter(listBefore, 1) ).toEqual(listAfter);
 };
 
+const testToggleTodo = () => {
+	const todoBefore = {
+		id: 0,
+		text: 'Learn Redux',
+		completed: false
+	};
+	const todoAfter = {
+		id: 0,
+		text: 'Learn Redux',
+		completed: true
+	};
+
+	deepFreeze(todoBefore);
+	expect( toggleTodo(todoBefore) ).toEqual(todoAfter);
+};
+
 testAddCounter();
 testRemoveCounter();
 testIncrementCounter();
+testToggleTodo();
 console.log('All tests passed.');
