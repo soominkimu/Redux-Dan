@@ -34,6 +34,7 @@ const createStore = (reducer) => {
 	let state;
 	let listeners = [];
 
+	console.log('createStore()');
 	const getState = () => state;
 
 	const dispatch = (action) => {
