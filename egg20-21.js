@@ -163,7 +163,7 @@ const getVisibleTodos = (
 };
 
 let nextTodoId = 0;
-const TodoApp = ({	// Presentational Component
+const TodoApp = ({	// Container Component
 	todos,
 	vFilter
 }) => (
