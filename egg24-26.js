@@ -1,6 +1,6 @@
 ReactDOM.render(
 	<div>
-		<h3>22-23. Extracting Container Components (FilterLink / VisibleTodoList, AddTodo)</h3>
+		<h3>{"24-26. Passing the Store Down Explicitly via Props / Implicitly via Context / with <Provider> from React Redux"}</h3>
 	</div>,
 	document.getElementById('title')
 );
@@ -57,9 +57,6 @@ const todoApp = combineReducers({
 	vFilter
 });
 
-const { createStore } = Redux;
-const store = createStore(todoApp);
-
 const { Component } = React;
 
 
@@ -94,8 +91,9 @@ const TodoList = ({ // Presentational Component
 	</ul>
 );
 
-const AddTodo = () => {	// either presentational and container
-	let input;
+let nextTodoId = 0;
+const AddTodo = (props, { store }) => {	// either presentational and container
+	let input;			// Referencing Context in Stateless Functional Components
 	return (
 		<div>
 			<input ref={node => { input = node; }} />
@@ -110,6 +108,9 @@ const AddTodo = () => {	// either presentational and container
 			}}>Add Todo</button>
 		</div>
 	);
+};
+AddTodo.contextTypes = {
+	store: PropTypes.object
 };
 
 const Link = ({ // Presentational Component
@@ -133,6 +134,7 @@ const Link = ({ // Presentational Component
 class FilterLink extends Component { // Container Component
 	componentDidMount() {
 		console.log("FilterLink:componentDidMount()");
+		const { store } = this.context;
 		this.unsubscribe = store.subscribe(() => this.forceUpdate());
 	}
 	componentWillUnmount() {
@@ -141,6 +143,7 @@ class FilterLink extends Component { // Container Component
 	}
 	render() {
 		const props = this.props;
+		const { store } = this.context;
 		const state = store.getState();
 		return (
 			<Link
@@ -156,6 +159,9 @@ class FilterLink extends Component { // Container Component
 			</Link>
 		);
 	}
+};
+FilterLink.contextTypes = {
+	store: PropTypes.object
 };
 
 const Footer = () => ( // Presentational Component
@@ -181,6 +187,7 @@ const getVisibleTodos = (
 class VisibleTodoList extends Component {
 	componentDidMount() {
 		console.log("FilterLink:componentDidMount()");
+		const { store } = this.context;
 		this.unsubscribe = store.subscribe(() => this.forceUpdate());
 	}
 	componentWillUnmount() {
@@ -189,6 +196,7 @@ class VisibleTodoList extends Component {
 	}
 	render() {
 		const props = this.props;
+		const { store } = this.context;
 		const state = store.getState();
 		return (
 			<TodoList
@@ -209,9 +217,11 @@ class VisibleTodoList extends Component {
 		);
 	}
 }
+VisibleTodoList.contextTypes = {
+	store: PropTypes.object
+};
 
-let nextTodoId = 0;
-const TodoApp = () => (
+const TodoApp = ({ store }) => (
 	<div>
 		<AddTodo />
 		<VisibleTodoList />
@@ -219,8 +229,27 @@ const TodoApp = () => (
 	</div>
 );
 
+//class provider extends component {
+//	getchildcontext() {	// the getchildcontext function will be called when the state or props changes.
+//		return {
+//			store: this.props.store
+//		};
+//	}
+//	render() {
+//		return this.props.children;
+//	}
+//}
+//provider.childcontexttypes = {
+//	store: proptypes.object		// prop-types.js (react.proptypes is deprecated)
+//};
+
+const { Provider } = ReactRedux;	// React bindings to the Redux library
+const { createStore } = Redux;
+
 ReactDOM.render(
-	<TodoApp />,
+	<Provider store={createStore(todoApp)} >
+		<TodoApp />
+	</Provider>,
 	document.getElementById('root')
 );
 
