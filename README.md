@@ -40,15 +40,15 @@ const createStore = (reducer) => {
 #### 16. Implementing combineReducers() from Scratch
 ```javascript
 const combineReducers = (reducers) => {
-	return (state = {}, action) => {
-		return Object.keys(reducers).reduce(
-			(nextState, key) => {
-				nextState[key] = reducers[key](state[key], action);
-			return nextState;
-			},
-			{}
-		);
-	};
+  return (state = {}, action) => {
+    return Object.keys(reducers).reduce(
+      (nextState, key) => {
+        nextState[key] = reducers[key](state[key], action);
+      return nextState;
+      },
+      {}
+    );
+  };
 };
 ```
 #### 17.18.19. React Todo List Example (Adding, Toggling, and Filtering Todos)
@@ -57,26 +57,26 @@ const combineReducers = (reducers) => {
 #### 24.25.26. Passing the Store Down Explicitly via Props / Implicitly via Context / with <Provider> from React Redux
 ```javascript
 class provider extends component {
-	getchildcontext() {	// the getchildcontext function will be called when the state or props changes.
-		return {
-			store: this.props.store
-		};
-	}
-	render() {
-		return this.props.children;
-	}
+  getchildcontext() { // the getchildcontext function will be called when the state or props changes.
+    return {
+      store: this.props.store
+    };
+  }
+  render() {
+    return this.props.children;
+  }
 }
 provider.childcontexttypes = {
-	store: proptypes.object		// prop-types.js (react.proptypes is deprecated)
+  store: proptypes.object   // prop-types.js (react.proptypes is deprecated)
 };
 
 const { createStore } = Redux;
 
 ReactDOM.render(
-	<Provider store={createStore(todoApp)} >
-		<TodoApp />
-	</Provider>,
-	document.getElementById('root')
+  <Provider store={createStore(todoApp)} >
+    <TodoApp />
+  </Provider>,
+  document.getElementById('root')
 );
 ```
 #### 27.28.29. Generating Containers with connect() from React Redux (VisibleTodoList / AddTodo / FilterLink)
@@ -84,69 +84,69 @@ ReactDOM.render(
 const { connect } = ReactRedux;
 
 const mapStateToTodoListProps = (state) => {
-	return {
-		todos: getVisibleTodos(
-			state.todos,
-			state.vFilter
-		)
-	};
+  return {
+    todos: getVisibleTodos(
+      state.todos,
+      state.vFilter
+    )
+  };
 };
 const mapDispatchToTodoListProps = (dispatch) => {
-	return {
-		onTodoClick: (id) => {
-			dispatch({
-				type: 'TOGGLE_TODO',
-				id
-			});
-			console.log('store.dispatch(TOGGLE_TODO)');
-		}
-	};
+  return {
+    onTodoClick: (id) => {
+      dispatch({
+        type: 'TOGGLE_TODO',
+        id
+      });
+      console.log('store.dispatch(TOGGLE_TODO)');
+    }
+  };
 };
-const VisibleTodoList = connect(	// results to a Container Component
-	mapStateToTodoListProps,
-	mapDispatchToTodoListProps
-)(TodoList);	// Presentational Component to connect to the Redux store
+const VisibleTodoList = connect(  // results to a Container Component
+  mapStateToTodoListProps,
+  mapDispatchToTodoListProps
+)(TodoList);  // Presentational Component to connect to the Redux store
 
 let nextTodoId = 0;
-let AddTodo = ({ dispatch }) => {	// either presentational and container
-	let input;			// Referencing Context in Stateless Functional Components
-	return (
-		<div>
-			<input ref={node => { input = node; }} />
-			<button onClick={() => {
-				dispatch({
-					type: 'ADD_TODO',
-					id: nextTodoId++,
-					text: input.value
-				});
-				console.log('store.dispatch(ADD_TODO)');
-				input.value = '';
-			}}>Add Todo</button>
-		</div>
-	);
+let AddTodo = ({ dispatch }) => { // either presentational and container
+  let input;      // Referencing Context in Stateless Functional Components
+  return (
+    <div>
+      <input ref={node => { input = node; }} />
+      <button onClick={() => {
+        dispatch({
+          type: 'ADD_TODO',
+          id: nextTodoId++,
+          text: input.value
+        });
+        console.log('store.dispatch(ADD_TODO)');
+        input.value = '';
+      }}>Add Todo</button>
+    </div>
+  );
 };
-AddTodo = connect()(AddTodo);	// not subscribe to the store, just inject dispatch as a prop
+AddTodo = connect()(AddTodo); // not subscribe to the store, just inject dispatch as a prop
 
 const mapStateToLinkProps = (state, ownProps) => {
-	return {
-		active:
-			ownProps.filter === state.vFilter
-	};
+  return {
+    active:
+      ownProps.filter === state.vFilter
+  };
 };
 const mapDispatchToLinkProps = (dispatch, ownProps) => {
-	return {
-		onClick: () => {
-			dispatch({
-				type: 'SET_VISIBILITY_FILTER',
-				filter: ownProps.filter
-			});
-			console.log("store.dispatch(SET_VISIBILITY_FILTER)");
-		}
-	};
+  return {
+    onClick: () => {
+      dispatch({
+        type: 'SET_VISIBILITY_FILTER',
+        filter: ownProps.filter
+      });
+      console.log("store.dispatch(SET_VISIBILITY_FILTER)");
+    }
+  };
 };
 const FilterLink = connect(
-	mapStateToLinkProps,
-	mapDispatchToLinkProps
+  mapStateToLinkProps,
+  mapDispatchToLinkProps
 )(Link);
 ```
 #### 30. Extracting Action Creators
@@ -154,25 +154,25 @@ const FilterLink = connect(
 //*** Action Creators ***
 let nextTodoId = 0;
 const addTodo = (text) => {
-	return {
-		type: 'ADD_TODO',
-		id: nextTodoId++,
-		text
-	};
+  return {
+    type: 'ADD_TODO',
+    id: nextTodoId++,
+    text
+  };
 };
 
 const toggleTodo = (id) => {
-	return {
-		type: 'TOGGLE_TODO',
-		id
-	};
+  return {
+    type: 'TOGGLE_TODO',
+    id
+  };
 };
 
 const setVisibilityFilter = (filter) => {
-	return {
-		type: 'SET_VISIBILITY_FILTER',
-		filter
-	};
+  return {
+    type: 'SET_VISIBILITY_FILTER',
+    filter
+  };
 };
 //*** Action Creators ***
 ```
