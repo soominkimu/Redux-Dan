@@ -1,7 +1,7 @@
 # Redux-Dan
 ##### Dan Abramov's egghead lecture codes
 
-#### 1. The Single Immutable
+#### 1. The Single Immutable State Tree
 > #### 1st principle of Redux
 > The entire *state* of the application will be represented by one JavaScript object.
 #### 2. Describing State Changes with Actions
